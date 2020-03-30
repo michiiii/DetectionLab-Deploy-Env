@@ -1,0 +1,13 @@
+GroupName,GroupType,GroupLocation
+Production,Global,"OU=global,OU=Groups"
+Research and Development,Global,"OU=global,OU=Groups"
+Purchasing,Global,"OU=global,OU=Groups"
+Marketing,Global,"OU=global,OU=Groups"
+Human Resource Management,Global,"OU=global,OU=Groups"
+Accounting and Finance,Global,"OU=global,OU=Groups"
+Sales,Global,"OU=global,OU=Groups"
+Helpdesk,Global,"OU=global,OU=Groups"
+DCAdmins,Global,"OU=global,OU=Groups"
+MSSQLAdmins,Global,"OU=global,OU=Groups"
+ExchangeAdmins,Global,"OU=global,OU=Groups"
+Management,Global,"OU=global,OU=Groups"
