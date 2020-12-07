@@ -84,7 +84,7 @@ else
 #### ASREP Roastable Users
 Write-Host "$('[{0:HH:mm}]' -f (Get-Date)) Adding ASREP Roastable Users..."
 
-if (!([ADSI]::Exists("LDAP://CN=MercureAdmin,OU=ServiceAccounts,OU=AdministrativeAccounts,DC=windomain,DC=local")))
+if (!([ADSI]::Exists("LDAP://CN=TankAdmin,OU=ServiceAccounts,OU=AdministrativeAccounts,DC=windomain,DC=local")))
 {
 	
 	New-ADUser -Name "TankAdmin" -DisplayName "TankAdmin" -SamAccountName "tankadm" -description "TankAdministrationAccount" -UserPrincipalName "tankadm" -GivenName "Tank" -Surname "Administrator" -AccountPassword ((ConvertTo-SecureString "Peaceful2020!" -AsPlainText -Force)) -Enabled $true -Path "OU=ServiceAccounts, OU=AdministrativeAccounts, DC=WINDOMAIN, DC=LOCAL" -ChangePasswordAtLogon $false -PasswordNeverExpires $true
