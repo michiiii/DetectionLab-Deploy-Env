@@ -7,5 +7,5 @@ Set-WinUserLanguageList -LanguageList de-DE -Force
 Write-Host "$('[{0:HH:mm}]' -f (Get-Date)) Disable NLA..."
 (Get-WmiObject -class "Win32_TSGeneralSetting" -Namespace root\cimv2\terminalservices -Filter "TerminalName='RDP-tcp'").SetUserAuthenticationRequired(0)
 
-	Write-Host "$('[{0:HH:mm}]' -f (Get-Date)) Disable Firewall..."
-	Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+Write-Host "$('[{0:HH:mm}]' -f (Get-Date)) Disable Firewall..."
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
