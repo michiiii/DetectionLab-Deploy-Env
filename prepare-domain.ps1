@@ -6,7 +6,7 @@ Write-Host "$('[{0:HH:mm}]' -f (Get-Date)) Adding Users with sensitive data in A
 if (!([ADSI]::Exists("LDAP://CN=PrinterAdmin,OU=ServiceAccounts,OU=AdministrativeAccounts,DC=windomain,DC=local")))
 {
 	
-	New-ADUser -Name "PrinterAdmin" -DisplayName "PrinterAdmin" -SamAccountName "printeradm" -description "Weird behavior on 9th of October... PW reset to x!3945jjlkJ2mN4QQ2" -UserPrincipalName "printeradm" -GivenName "Printer" -Surname "Administrator" -AccountPassword ((ConvertTo-SecureString "x!3945jjlkJ2mN4QQ2" -AsPlainText -Force)) -Enabled $true -Path "OU=ServiceAccounts, OU=AdministrativeAccounts, DC=WINDOMAIN, DC=LOCAL" -ChangePasswordAtLogon $false -PasswordNeverExpires $true
+	New-ADUser -Name "PrinterAdmin" -DisplayName "PrinterAdmin" -SamAccountName "printeradm" -description "Change: ITCH-29492 - PW reset to x!3945jjlkJ2mN4QQ2" -UserPrincipalName "printeradm" -GivenName "Printer" -Surname "Administrator" -AccountPassword ((ConvertTo-SecureString "x!3945jjlkJ2mN4QQ2" -AsPlainText -Force)) -Enabled $true -Path "OU=ServiceAccounts, OU=AdministrativeAccounts, DC=WINDOMAIN, DC=LOCAL" -ChangePasswordAtLogon $false -PasswordNeverExpires $true
 	Write-Host "$('[{0:HH:mm}]' -f (Get-Date)) Created user printeradm with sensitive data in User Attributes" 
 }
 else
