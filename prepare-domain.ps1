@@ -109,6 +109,11 @@ else
   Write-Host "$('[{0:HH:mm}]' -f (Get-Date)) The user MailerAdmin already exists. Moving On."
 }
 
+### Vulnerable GPP GPO
+Write-Host "$('[{0:HH:mm}]' -f (Get-Date)) Creating vulnerable honeypot GPO..."
+$gpoGUID='{AB7056F2-2F4F-1337-9F13-6956913B9893}'
+$gpoPath="C:\Windows\SYSVOL\sysvol\windomain.local\Policies\$($gpoGUID)\Machine"
+$groupsXMLPath= "$($gpoPath)\groups.xml"
 
-
-
+New-Item -ItemType Directory -Force -Path $gpoPath -ErrorAction SilentlyContinue
+Set-Content $groupPath '<?xml version="1.0" encoding="utf-8" ?><Groups clsid="{3125E937-EB16-4b4c-9934-544FC6D24D26}"><User clsid="{DF5F1855-51E5-4d24-8B1A-D9BDE98BA1D1}" name="Administrator (built-in)" image="2" changed="2019-03-17 03:17:23" uid="{D5FE7352-81E1-42A2-B7DA-118402BE4C33}"><Properties action="U" newName="TRDAdmin" fullName="" description="Standard Admin Account" cpassword="Pe81R/eXjjPtd5oJw6D0hifqz78ezVt7tD0ViS9eTg+z2dKIvfwMRbD5JPFEA26i" changelogon="0" noChange="0" neverExpires="0" acctDisabled="0" subAuthority="RID_ADMIN" userName="Administrator (built-in)" expires="2025-03-16" /></User></Groups>'
