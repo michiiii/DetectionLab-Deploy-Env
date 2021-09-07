@@ -116,4 +116,14 @@ $gpoPath="C:\Windows\SYSVOL\sysvol\windomain.local\Policies\$($gpoGUID)\Machine"
 $groupsXMLPath= "$($gpoPath)\groups.xml"
 
 New-Item -ItemType Directory -Force -Path $gpoPath -ErrorAction SilentlyContinue
-Set-Content $groupsXMLPath '<?xml version="1.0" encoding="utf-8"?><Groups clsid="{3125E937-EB16-4b4c-9934-544FC6D24D26}"><User clsid="{DF5F1855-51E5-4d24-8B1A-D9BDE98BA1D1}" name="Administrator (built-in)" image="2" changed="2019-03-17 03:17:23" uid="{D5FE7352-81E1-42A2-B7DA-118402BE4C33}"><Properties action="U" newName="TRDAdmin" fullName="" description="Standard Admin Account" cpassword="Pe81R/eXjjPtd5oJw6D0hifqz78ezVt7tD0ViS9eTg+z2dKIvfwMRbD5JPFEA26i" changelogon="0" noChange="0" neverExpires="0" acctDisabled="0" subAuthority="RID_ADMIN" userName="Administrator (built-in)" expires="2025-03-16" /></User></Groups>'
+Set-Content $groupsXMLPath '<?xml version="1.0" encoding="utf-8"?><Groups clsid="{3125E937-EB16-4b4c-9934-544FC6D24D26}"><User clsid="{DF5F1855-51E5-4d24-8B1A-D9BDE98BA1D1}" name="Administrator (built-in)" image="2" changed="2019-03-17 03:17:23" uid="{D5FE7352-81E1-42A2-B7DA-118402BE4C33}"><Properties action="U" newName="PTFAdmin" fullName="" description="PTF Server Admin Account" cpassword="Pe81R/eXjjPtd5oJw6D0hifqz78ezVt7tD0ViS9eTg+z2dKIvfwMRbD5JPFEA26i" changelogon="0" noChange="0" neverExpires="0" acctDisabled="0" subAuthority="RID_ADMIN" userName="Administrator (built-in)" expires="2025-03-16" /></User></Groups>'
+
+if (!([ADSI]::Exists("LDAP://CN=PTFAdmin,OU=ServiceAccounts,OU=AdministrativeAccounts,DC=windomain,DC=local")))
+{
+	New-ADUser -Name "PTFAdmin" -DisplayName "PTFAdmin" -SamAccountName "PTFAdmin" -description "PTF Server Administrator Account (sensitive)" -UserPrincipalName "PTFAdmin" -GivenName "PTF" -Surname "Admin" -Enabled $true -Path "OU=ServiceAccounts, OU=AdministrativeAccounts, DC=WINDOMAIN, DC=LOCAL" -ChangePasswordAtLogon $false -PasswordNeverExpires $true -AccountPassword ((ConvertTo-SecureString "Peaceful2020!" -AsPlainText -Force)) 
+	Write-Host "$('[{0:HH:mm}]' -f (Get-Date)) Created PTFAdmin Honeypot user for GPPPassword..." 
+}
+else
+{
+  Write-Host "$('[{0:HH:mm}]' -f (Get-Date)) The user PTFAdmin already exists. Moving On."
+}
